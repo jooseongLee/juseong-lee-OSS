@@ -1,5 +1,4 @@
 # juseong-lee-OSS
-=================
 This program is managing Who joined club.
 -----------------------------------------
 1. you can add, search , delete studend list by this program.
