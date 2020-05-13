@@ -9,3 +9,5 @@ base.o : base.h base.c
 
 extras.o : extras.h extras.c
 	gcc -c -o extras.o extras.c
+clean :
+	rm *.o *.out
