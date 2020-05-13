@@ -4,24 +4,27 @@
 #include <string.h>
 #include "base.h"
 
+int idx = -1;
+
 // Function: print_all_records()
 // Input: record - array of Records; this may contain empty elements in the middle
 // Output: none
 // - Leave a brief information about the function
 void print_all_records(Record records[]){
 	// TODO: Modify this function as you need
-	for(int i =0; i < 1000; i++)
+	for(int i = 0; i < idx + 1; i++)
   {
-    if(records[i].number == 0)
-    continue;
-    else
-    {
+    //if(records[i].number == 0)
+   // continue;
+		//else if (records[i].name == NULL) break;
+    //else
+    //{
       printf("\n Student name : %s. Student number : %d", records[i].name,records[i].number);
       printf("\n joined club : %s",records[i].inclub ? "yes" : "no");
       printf("\n club : %s",records[i].club);
       printf("\n club department : %s ",records[i].clubdepart);
-      printf("\n index : %d",i);
-    }
+      printf("\n index : %d\n",i);
+    //}
   }
 }
 
@@ -30,50 +33,48 @@ void print_all_records(Record records[]){
 // Input: record - array of Records; this may contain empty elements in the middle
 // Output: none
 // - Leave a brief information about the function
-void add_a_record(Record records[]){
-	// TODO: Modify this function as you need
- char name[20];
- int num;
- char inclub[20];
- char club[20];
- char clubdepart[20];
- int idx = -1;
+void add_a_record(Record records[]) {
+    // TODO: Modify this function as you need
+    char name[20];
+    int num;
+    char inclub[20];
+    char club[20];
+    char clubdepart[20];
 
- printf("Student name : ");
- scanf("s",&name);
- printf("Student number : ");
- scanf("%d",&num);
- printf("Does a new student join club? (yes/no) :");
- scanf("%s",&inclub);
- printf("what is club name : ");
- scanf("%s",&club);
- printf("What is club department : ");
- scanf("%s",&clubdepart);
+    for (int i = 0; i < 10; i++)
+        records[i].number = 0;
 
- for(int i = 0; i < 1000; i++)
-  {
-    if(records[i].number == 0)
-      idx = i;
-  }
-  if(idx == -1)
-  {
-    printf("\nRecord is full please delete any record.\n");
-  }
-  else
-  {
-    
-    strcpy(records[idx].name, name);
-    records[idx].number = num;
-    if(!strcmp(inclub, "yes"))
-      records[idx].inclub = true;
-    else if(!strcmp(inclub, "no"))
-      records[idx].inclub = false;
-    strcpy(records[idx].club,club);
-    strcpy(records[idx].clubdepart,clubdepart);
-   
-          
-    
-  }
+    printf("Student name : ");
+    scanf("%s", name);
+    printf("Student number : ");
+    scanf("%d", &num);
+    printf("Does a new student join club? (y/n) :");
+    scanf("%s", inclub);
+		if(!strcmp(inclub, "y")) {
+    	printf("what is club name : ");
+    	scanf("%s", club);
+			printf("What is club department : ");
+	    scanf("%s", clubdepart);
+		}
+		fflush(stdin);
+
+    for (int i = 0; i < 10; i++) {
+        if (records[i].number == 0)
+        {
+            idx = i;
+            break;
+        }
+    }
+    if(idx == -1) printf("\nRecord is full please delete any record.\n");
+    else
+    {
+        strcpy(records[idx].name, name);
+        records[idx].number = num;
+        if(!strcmp(inclub, "y")) records[idx].inclub = true;
+        else if(!strcmp(inclub, "n")) records[idx].inclub = false;
+        strcpy(records[idx].club,club);
+        strcpy(records[idx].clubdepart,clubdepart);
+    }
 }
 
 void load_datafile(Record records[])
@@ -97,20 +98,20 @@ void load_datafile(Record records[])
         while(p != NULL)
         {
           switch(count){
-              case 0 : 
+              case 0 :
               strcpy(records[idx].name, p);
               break;
-              case 1 : 
+              case 1 :
               records[idx].number = atoi(p);
               break;
-              case 2 : 
+              case 2 :
               if(!strcmp(p, "yes"))
                 records[idx].inclub = true;
               else
                 records[idx].inclub = false;
-              case 3 : 
+              case 3 :
               strcpy(records[idx].club, p);
-              case 4 : 
+              case 4 :
               strcpy(records[idx].clubdepart, p);
           }
           count++;
@@ -127,7 +128,7 @@ void load_datafile(Record records[])
       strcpy(records[i].club, "");
       strcpy(records[i].clubdepart, "");
     }
-    printf("\nload complete!\n");   
+    printf("\nload complete!\n");
 }
 
 
@@ -181,7 +182,7 @@ void export_datafile(Record records[])
     }
   }
 
-    fclose(fp);   
+    fclose(fp);
 }
 
 void export_reportfile(Record records[])
@@ -196,8 +197,8 @@ void export_reportfile(Record records[])
     if(records[i].number == 0)
       continue;
     else
-    { 
-      
+    {
+
       sprintf(total, "%d", count);
       fputs(total, fp);
       fputs("\n", fp);
@@ -224,7 +225,7 @@ void export_reportfile(Record records[])
     }
   }
 
-    fclose(fp);   
+    fclose(fp);
 }
 
 void update_detail(Record records[])
@@ -266,7 +267,7 @@ void update_detail(Record records[])
         strcpy(records[i].club, info);
         printf("\nupdated!\n");
         break;
-        case 5: 
+        case 5:
         printf("\nplease enter club department : ");
         scanf("%s", info);
         strcpy(records[i].clubdepart, info);
@@ -289,5 +290,6 @@ void delete_student(Record records[])
       records[i].number = 0;
   }
   printf("\nstudent deleted\n");
-  
+
 }
+
