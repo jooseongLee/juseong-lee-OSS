@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <string.h>
 #include "base.h"
@@ -38,25 +39,27 @@ void input_handler(char input[], Record records[]){
 	if(!strcmp(input, "1"))
 		add_a_record(records);
 	else if(!strcmp(input, "2"))
-		print_all_records(records);	
+		print_all_records(records);
 	else if(!strcmp(input, "3"))
-		load_datafile(records);
+	  print_names(records);
 	else if(!strcmp(input, "4"))
+		load_datafile(records);
+	else if(!strcmp(input, "5"))
 	  search(records);
-  else if(!strcmp(input, "5"))
-    export_datafile(records);
   else if(!strcmp(input, "6"))
-    export_reportfile(records);
+    export_datafile(records);
   else if(!strcmp(input, "7"))
-    update_detail(records);
+    export_reportfile(records);
   else if(!strcmp(input, "8"))
-    delete_student(records);
+    update_detail(records);
   else if(!strcmp(input, "9"))
-    defragment(records);
+    delete_student(records);
   else if(!strcmp(input, "10"))
+    defragment(records);
+  else if(!strcmp(input, "11"))
     display_stats(records);
   else if(!strcmp(input, "12"))
-    sort_record(records);	
+    sort_record(records);
 	else if(!strcmp(input, "99"))
 		printf("Terminating... bye!\n"); // Quit - no operation (an empty statement with a semi-colon)
 	else
@@ -76,16 +79,18 @@ void display_menu(){
 	printf("******************************\n");
 	printf(" Membership management system \n");
 	printf("******************************\n");
-	printf(" 1. Add a new membber\n");
+	printf(" 1. Add a new member\n");
 	printf(" 2. Print all members\n");
-	printf(" 3. Load a new data file\n");
-	printf(" 4. searching students\n");
-  printf(" 5. Export data file\n");
-  printf(" 6. Export report file\n");
-  printf(" 7. Update student\n");
-  printf(" 8. Delete student\n");
-  printf(" 9. Optimize data\n");
-  printf(" 10. See the stats\n");
+	printf(" 3. Print only member's name\n");
+	printf(" 4. Load a new data file\n");
+	printf(" 5. searching students\n");
+  printf(" 6. Export data file\n");
+  printf(" 7. Export report file\n");
+  printf(" 8. Update student\n");
+  printf(" 9. Delete student\n");
+  printf(" 10. Optimize data\n");
+  printf(" 11. See the stats\n");
   printf(" 12. Sorting\n");
 	printf(" 99. Quit\n");
 }
+
