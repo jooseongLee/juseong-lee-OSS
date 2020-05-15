@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -27,6 +28,23 @@ void print_all_records(Record records[]){
     //}
   }
 }
+
+// Function: print_names()
+// Input: record - array of Records; this may contain empty elements in the middle
+// Output: none
+// To print names
+void print_names(Record records[]) {
+    // TODO: Modify this function as you need
+    int len = 10;
+    int i = 0;
+    while (i < len) {
+        if (i >= len) break;
+        if (records[i].name[0] != '\0') printf("  no.%d : %s\n", i + 1, records[i].name);
+        i++;
+    }
+    printf("\n");
+}
+
 
 
 // Function: add_a_record()
